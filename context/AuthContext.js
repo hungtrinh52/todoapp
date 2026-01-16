@@ -6,7 +6,11 @@ const FAKE_USERS = [
     { email: 'zoro@gmail.com',  password: '123456', name: 'Roronoa Zoro',    avatar: 'sword' },
     { email: 'hungtrinh123',  password: '123456', name: 'Humaris',           avatar: 'map' },
 ];
-const AuthContext = createContext({});
+const AuthContext = createContext({
+    user : null,
+    login: () =>({success:false}),
+    logout: () =>{},
+});
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);

@@ -2,11 +2,13 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import {AuthProvider} from './context/AuthContext';
+import {AuthProvider, useAuth} from './context/AuthContext';
 import { TodoProvider } from './context/ToDoContext';
 
 import SignIn from './screens/SignIn';
 import SignUp from "./screens/SignUp";
+import Home from "./screens/Home";
+import AddTask from "./screens/AddTask";
 
 
 
@@ -17,14 +19,26 @@ import HomeTabs from './src/navigation/HomeTabs';
 const Stack = createNativeStackNavigator();
 
 function Root() {
+    const {user} = useAuth();
+    console.log('AUTH USER: ',user)
   return (
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="SignIn" component={SignIn} />
-        <Stack.Screen name="SignUp" component={SignUp}/>
-       {/* <Stack.Screen name="Main" component={HomeTabs} />
+          {user ?(
+              <>
+                  <Stack.Screen name="Home" component ={Home}/>
+                  <Stack.Screen name="AddTask" component ={AddTask}/>
+              </>
 
-        <Stack.Screen name="AddToDo" component={AddToDoScreen} />*/}
+          ):(
+              <>
+                  <Stack.Screen name="SignIn" component={SignIn}/>
+                  <Stack.Screen name="SignUp" component={SignUp}/>
+              </>
+
+          )}
+
       </Stack.Navigator>
+
   );
 }
 

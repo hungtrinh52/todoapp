@@ -28,9 +28,7 @@ export default function SignIn() {
     const handleLogin = () => {
         setError('');
         const result = login(email.toLowerCase().trim(), password);
-        if (result.success) {
-            navigation.replace('Main');
-        } else {
+        if (!result.success) {
             setError(result.error);
         }
     };

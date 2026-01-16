@@ -4,19 +4,25 @@ import { v4 as uuidv4 } from 'uuid';
 const TodoContext = createContext();
 export const TodoProvider = ({children}) =>{
     const [todos,setTodos] =useState([
-        { id: '1', text: 'Học React Navigation', completed: false },
-        { id: '2', text: 'Làm Todo App đẹp', completed: false },
-        { id: '3', text: 'Ngủ sớm hôm nay', completed: true },
+        { id: '1', title: 'Học React Navigation',category:"Work",completed:false,start:"8:00",end:"10:00"},
+        { id: '2', title: 'Làm Todo App', category:"Project", completed: false },
+        { id: '3', title: 'Ngủ sớm hôm nay', completed: true },
     ]);
 
-    const addTodo = (text) =>{
-        if(!text.trim()) return ;
+    const addTodo = ({title, category,date, start, end,priority,description}) =>{
+        if(!title.trim()) return ;
         const newTodo = {
-            id: uuidv4,
-            text: text.trim(),
+            id: uuidv4(),
+            title: title.trim(),
+            category,
             completed: false,
+            date,
+            start,
+            end,
+            priority,
+            description
         };
-        setTodos(prev=> [...prev,newTodo]);
+        navigation.goBack();
     }
 
     const toggleTodo = (id) => {
