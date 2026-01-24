@@ -2,9 +2,9 @@ import React, { createContext, useContext, useState } from 'react';
 
 
 const FAKE_USERS = [
-    { email: 'luffy@gmail.com', password: '123456', name: 'Monkey D. Luffy', avatar: 'pirate' },
-    { email: 'zoro@gmail.com',  password: '123456', name: 'Roronoa Zoro',    avatar: 'sword' },
-    { email: 'hungtrinh123',  password: '123456', name: 'Humaris',           avatar: 'map' },
+    { id: 1,email: 'luffy@gmail.com', password: '123456', name: 'Monkey D. Luffy', avatar: 'pirate' },
+    { id:2,email: 'zoro@gmail.com',  password: '123456', name: 'Roronoa Zoro',    avatar: 'sword' },
+    { id:3,email: 'hungtrinh123',  password: '123456', name: 'Humaris',           avatar: 'map' },
 ];
 const AuthContext = createContext({
     user : null,

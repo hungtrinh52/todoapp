@@ -1,15 +1,19 @@
-import {StyleSheet, View,Text,Image} from "react-native";
+import {StyleSheet, View, Text, Image, Pressable} from "react-native";
+import {useNavigation} from "@react-navigation/native";
 
 
 export default function Header ({user}) {
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <View>
                 <Text style ={styles.hello}>Hello {user?.name || "User"},</Text>
                 <Text style = {styles.sub}>You have work today</Text>
             </View>
-            <Image source={require('../../assets/avt7.png')} style={styles.avatar}/>
-
+            <Pressable onPress={()=>navigation.navigate("Profile" ,{id:user.id})}>
+                <Image source={require('../../assets/avt7.png')} style={styles.avatar}/>
+            </Pressable>
         </View>
     )
 }

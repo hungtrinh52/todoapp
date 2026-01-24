@@ -1,11 +1,32 @@
-import { View, Text, StyleSheet } from "react-native";
+import {View, Text, StyleSheet, Pressable, Alert} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import {useTodo} from "../../context/ToDoContext";
+import {useNavigation} from "@react-navigation/native";
 
 export default function TaskItem({ task }) {
+    const {deleteTodo,toggleTodo} = useTodo();
+    const navigation = useNavigation();
+    const confirmDelete =() =>{
+        Alert.alert(
+            "Delete task",
+            "Are you sure want to delete this task?",
+            [
+                {text: "Cancel", style:"cancel"},
+                {
+                    text:"Confirm",
+                    style:"destructive",
+                    onPress:()=> deleteTodo(task.id),
+                }
+            ]
+        )
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.left}>
-                <View style={styles.circle} />
+                    <Pressable onPress={()=> toggleTodo(task.id)}>
+                        <View style={styles.circle}/>
+                    </Pressable>
                 <Text
                     style={[
                         styles.text,
@@ -14,11 +35,16 @@ export default function TaskItem({ task }) {
                 >
                     {task.title}
                 </Text>
-                <Text></Text>
+
             </View>
 
             <View style={styles.actions}>
-                <Ionicons name="trash" size={18} color="red" />
+                <Pressable onPress={()=>navigation.navigate("TaskForm",{id:task.id})}>
+                    <Ionicons name="pencil" size={18} color ="blue"/>
+                </Pressable>
+                <Pressable onPress={confirmDelete}>
+                    <Ionicons name="trash" size={18} color="red" />
+                </Pressable>
             </View>
         </View>
     );
